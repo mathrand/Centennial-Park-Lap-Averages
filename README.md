@@ -74,9 +74,9 @@ Laps: 3
 
 Fastest Lap: 00:04:15
 Average Lap: 00:04:22
-===========================
+
 ...
-#####################
+
 Average Laps:
 00:04:22 Centennial Park Loop 
 Fastest Ever Laps:
