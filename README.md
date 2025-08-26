@@ -1,68 +1,60 @@
-# Centennial Park Lap Splits (Strava) # 
+# 🏃 Centennial Park Lap Splits (Strava)
 
-This Python script retrieves lap split data for the famous Centennial Park Loop in Sydney, Australia, using the Strava API. The script fetches athlete data, calculates lap times, and provides averages and fastest laps for each activity.
+A Python script that analyzes lap split data for the iconic **Centennial Park Loop** in Sydney, Australia using the Strava API. It fetches athlete activity data, calculates lap times, and highlights performance insights like fastest laps and averages.
 
-## Features
+---
 
-Retrieves and processes lap splits for Centennial Park Loop (Strava Segment ID: 2524690).
+## 🚀 Features
 
-Outputs the fastest lap and average lap time for each activity.
+- Retrieves lap splits for **Centennial Park Loop**  
+  *(Strava Segment ID: `2524690`)*
+- Calculates:
+  - Fastest lap per activity
+  - Average lap time
+- Compares performance with other athletes
+- Displays detailed lap-by-lap breakdown for the authenticated athlete
 
-Collects data on other athletes for comparison.
+---
 
-Displays detailed lap-by-lap analysis for the current athlete.
+## 🧰 Prerequisites
 
-## Prerequisites
+- **Python 3.x**
+- **stravalib** library  
+  Install via pip:
+  ```bash
+  pip install stravalib
+  ```
+- **Strava Access Token**  
+  Obtain one by following the [Strava API documentation](https://developers.strava.com/docs/)
 
-Python 2.x
+---
 
-The stravalib library for interacting with the Strava API. Install it via pip:
+## ⚙️ How It Works
 
-pip install stravalib
+1. **Authentication**  
+   Uses your Strava access token to authenticate with the API.
 
+2. **Data Fetching**  
+   Retrieves all segment efforts for the Centennial Park Loop.
 
-A valid Strava access token. You can obtain one by following the steps on the Strava API documentation
-.
+3. **Lap Time Calculations**  
+   - Converts lap durations to seconds  
+   - Tracks fastest lap per activity  
+   - Computes average lap time
 
-# How It Works
+---
 
-Authentication: The script uses a Strava access token to authenticate and interact with the Strava API.
+## 📊 Output
 
-Data Fetching: It fetches all lap split data (segment efforts) for the Centennial Park Loop from the Strava API.
+The script prints:
 
-Lap Time Calculations:
+- Lap-by-lap details
+- Fastest and average lap times
+- Number of laps per activity
+- Summary across all activities
 
-Each lap is processed to calculate the time in seconds.
-
-The script tracks the fastest lap for each activity and calculates the average lap time.
-
-# Display Output:
-
-The script prints lap-by-lap details, including fastest lap times, average lap times, and the number of laps.
-
-At the end, it provides a summary of the fastest laps and average lap times for all activities.
-
-# Usage
-
-Clone this repository or download the script file.
-
-Ensure you have Python 2.x installed and the required dependencies (stravalib).
-
-Run the script from the command line, passing your Strava access token as the argument:
-
-python centennial_lap_splits.py <YOUR_ACCESS_TOKEN>
-
-
-Replace <YOUR_ACCESS_TOKEN> with your actual Strava access token.
-
-Example:
-python centennial_lap_splits.py abc123xyz456
-
-
-The script will print detailed information about the Centennial Park Loop laps for the authenticated athlete.
-
-Example Output:
-
+**Example Output:**
+```
 John Doe, 12345
 Name: Centennial Park Loop (Segment ID: 2524690)
 Other Athletes: Jane Smith, Michael Lee
@@ -79,6 +71,24 @@ Average Lap: 00:04:22
 
 Average Laps:
 00:04:22 Centennial Park Loop 
-Fastest Ever Laps:
-00:04:15 Centennial Park Loop Jane Smith, Michael Lee
 
+Fastest Ever Laps:
+00:04:15 Centennial Park Loop — Jane Smith, Michael Lee
+```
+
+---
+
+## 🧪 Usage
+
+1. Clone this repository or download the script.
+2. Ensure Python 3.x and `stravalib` are installed.
+3. Run the script with your Strava access token:
+   ```bash
+   python centennial_lap_splits.py <YOUR_ACCESS_TOKEN>
+   ```
+   Replace `<YOUR_ACCESS_TOKEN>` with your actual token.
+
+**Example:**
+```bash
+python centennial_lap_splits.py abc123xyz456
+```
