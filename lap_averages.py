@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # Get Lap Averages for Centennial Lap Social on Strava
 import logging
 #import inspect
@@ -28,13 +28,14 @@ def sec_to_hms(sec):
 if (len(sys.argv)==2):
     STORED_ACCESS_TOKEN=sys.argv[1]
 else:
-    sys.exit(sys.argv[0],"missing access token as only parameter")
+    print(f"{sys.argv[0]}: missing access token as only parameter", file=sys.stderr)
+    sys.exit(1)
 
 
 from stravalib import Client
 client = Client(access_token=STORED_ACCESS_TOKEN)
 athlete = client.get_athlete() # Get current athlete details
-print("Hello, {} {}, {} ".format(athlete.firstname, athlete.lastname, athlete.id))
+print(("Hello, {} {}, {} ".format(athlete.firstname, athlete.lastname, athlete.id)))
 
 rides_dict = []
 activity_id = set()
@@ -68,35 +69,35 @@ for f in rides_dict:
             fastest_lap_per_activity[0] = lap_in_seconds
             fastest_lap_per_activity[1] = f[2]
         average_laps += lap_in_seconds
-        print "    lap time",f[2]
+        print("    lap time",f[2])
 
     else:
         # first run on a new activity laps, so wrap up last summary and set all new variables
         if len(fastest_lap_per_activity) > 0:
             #just a way to see if we are on first loop
-            print "Fastest Lap:", fastest_lap_per_activity[1]        
-            print "Average Lap:", sec_to_hms(average_laps/lap_count)
+            print("Fastest Lap:", fastest_lap_per_activity[1])
+            print("Average Lap:", sec_to_hms(average_laps/lap_count))
             fastest_lap_all_time.append([fastest_lap_per_activity[1],activity.name,other_athletes])
             average_laps_all_time.append([(average_laps/lap_count),activity.name,other_athletes])
-        print "==========================="
+        print("===========================")
 
         activity = client.get_activity(f[1])
-        print "Name:", activity.name
+        print("Name:", activity.name)
 
         #relations = client.get_related_activities(f[1])
         #print relations
-        print "Other Athletes:",
+        print("Other Athletes:", end=' ')
         other_athletes = ""
         #for h in relations:
         #    print h.athlete.id, "Ride name:", h.name
         #    other_athletes += get_name(h.athlete.id)+","
-        print other_athletes
+        print(other_athletes)
         count = 0
         for g in rides_dict:
             if g[1] == f[1]:
                 count += 1
         lap_count = count
-        print "Laps:", count        
+        print("Laps:", count)
 
         #lap analysis
         #print "epoch",f[0],"activity id",f[1],"lap time",f[2], lap_to_sec(f[2])
@@ -105,25 +106,25 @@ for f in rides_dict:
         fastest_lap_per_activity.append(lap_in_seconds)
         fastest_lap_per_activity.append(f[2])
         average_laps=lap_in_seconds
-        print "    lap time",f[2]
+        print("    lap time",f[2])
         last_activity_id = f[1]
 
 if len(fastest_lap_per_activity) > 0:
-    print "Fastest Lap:", fastest_lap_per_activity[1]
-    print "Average Lap:", sec_to_hms(average_laps/lap_count)
+    print("Fastest Lap:", fastest_lap_per_activity[1])
+    print("Average Lap:", sec_to_hms(average_laps/lap_count))
     fastest_lap_all_time.append([fastest_lap_per_activity[1],activity.name,other_athletes])
     average_laps_all_time.append([(average_laps/lap_count),activity.name,other_athletes])
 
 
-print ""
-print "#####################"
-print "Average Laps:"
+print("")
+print("#####################")
+print("Average Laps:")
 for j,x,q in average_laps_all_time:
-    print sec_to_hms(j),x,q
-print "#####################"
-print "Fastest Ever Laps:" 
+    print(sec_to_hms(j),x,q)
+print("#####################")
+print("Fastest Ever Laps:")
 for k,y,u in fastest_lap_all_time:
-    print k,y,u
-print ""
-print ""
+    print(k,y,u)
+print("")
+print("")
 
